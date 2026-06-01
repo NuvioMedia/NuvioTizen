@@ -1,0 +1,37 @@
+(function openHostedNuvioTv() {
+  var hostedAppUrl = "https://web.nuvioapp.space/";
+  var tvInput = window.tizen && window.tizen.tvinputdevice;
+
+  function buildFreshHostedUrl() {
+    try {
+      var url = new URL(hostedAppUrl);
+      url.searchParams.set("source", "tizen-hosted");
+      url.searchParams.set("wrapper", "tizen");
+      url.searchParams.set("_cb", String(Date.now()));
+      return url.toString();
+    } catch (_) {
+      return hostedAppUrl + "?_cb=" + encodeURIComponent(String(Date.now()));
+    }
+  }
+
+  if (tvInput && typeof tvInput.registerKey === "function") {
+    [
+      "Back",
+      "Return",
+      "MediaPlay",
+      "MediaPause",
+      "MediaPlayPause",
+      "MediaStop",
+      "MediaFastForward",
+      "MediaRewind",
+      "MediaTrackPrevious",
+      "MediaTrackNext"
+    ].forEach(function registerKey(keyName) {
+      try {
+        tvInput.registerKey(keyName);
+      } catch (_) {}
+    });
+  }
+
+  window.location.replace(buildFreshHostedUrl());
+}());

@@ -1,0 +1,13 @@
+{
+  "name": "nuvio-tizen-hosted",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Hosted standalone Tizen WGT wrapper for Nuvio TV",
+  "scripts": {
+    "package": "node ./scripts/package-hosted-tizen.mjs"
+  },
+  "dependencies": {
+    "jszip": "^3.10.1"
+  }
+}
